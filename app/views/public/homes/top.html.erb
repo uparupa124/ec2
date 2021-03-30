@@ -1,0 +1,23 @@
+<div class = "container">
+ <div class="card" style="max-width:300;">
+  <%= image_tag "cake.jpg", class:"card-img", size:"300x400"%>
+   <div class="card-img-overlay">
+     <p><strong>ようこそ、ながのCAKEへ！</br>
+        このサイトは、ケーキ販売のECサイトになります。</br>
+        会員出ない方も商品の閲覧はできますが、</br>
+        購入には会員登録が必要になります。</strong></p>
+   </div>
+ </div>
+
+<div class="my-5">
+  <h3><strong>新着商品</strong></h3>
+    <% @item.each do |item| %>
+     <div class="d-inline-block list-unstyled pr-5">
+      <li><a href="/items/<%= item.id %>"><%= attachment_image_tag item, :image, size: "100x100", format:"jpeg", fallback:"noimage-1024x898.png", size:"100x100" %></a></li>
+      <li><%= link_to item.name, item_path(item) %></li>
+      <li>¥<%= item.price %></li>
+     </div>
+    <% end %>
+</div>
+        <p class="text-right"><%= link_to "全ての商品を見る>", items_path %></p>
+</div>

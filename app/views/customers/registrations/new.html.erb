@@ -1,0 +1,109 @@
+<div class="container">
+  <div class="d-flex align-items-center" style="width:100%; height:100px;">
+    <h3><span class="bt-light">新規会員登録</span></h3>
+  </div>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+   <table>
+    <tbody>
+     <tr>
+       <td>名前</td>
+    　   <td>
+    　 　 <div class="field">
+              <%= f.label :"(姓)" %>
+              &nbsp;&thinsp;&thinsp;&thinsp;
+              <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name" %>
+         </div>
+        </td>
+          <td>
+        　  <div class="field">
+               &nbsp;&nbsp;&nbsp;&nbsp;<%= f.label :"(名)" %>
+               <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name" %>
+           </div>
+     </tr>
+       <tr>
+         <td>フリガナ</td>
+          <td>
+            <div class="field">
+                 <%= f.label :"(セイ)" %>
+                 <%= f.text_field :first_name_kana, autofocus: true, autocomplete: "first_name_kana" %>
+            </div>
+          </td>
+            <td>
+              <div class="field">
+                 <%= f.label :"(メイ)" %>
+                 <%= f.text_field :last_name_kana, autofocus: true, autocomplete: "last_name_kana" %>
+              </div>
+            </td>
+       </tr>
+         <tr>
+           <td>メールアドレス</td>
+            <td>
+             <div class="field">
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+             </div>
+            </td>
+          </tr>
+            <tr>
+              <td>郵便番号(ハイフンなし)</td>
+                <td>
+                  <div class="field">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code" %>
+                     </div>
+                </td>
+            </tr>
+             <tr>
+               <td>住所</td>
+                 <td colspan="2">
+                  <div class="field">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= f.text_field :address, autofocus: true, autocomplete: "address", style:"width:89%;" %>
+                  </div>
+                 </td>
+              </tr>
+                <tr>
+                 <td>電話番号(ハイフンなし)</td>
+                   <td>
+                     <div class="field">
+                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= f.text_field :telephone_number, autofocus: true, autocomplete: "telephone_number" %>
+                     </div>
+                   </td>
+                </tr>
+                  <tr>
+                    <td>
+                      パスワード(6文字以上)
+                    </td>
+                      <td>
+                       <div class="field">
+                         <% if @minimum_password_length %>
+                         
+                         <% end %>
+                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= f.password_field :password, autocomplete: "new-password" %>
+                       </div>
+                      </td>
+                  </td>
+                    <tr>
+                      <td>
+                        パスワード(確認用)
+                      </td>
+                        <td>
+                          <div class="field">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+                          </div>
+                        </td>
+                    </tr>
+    </tbody>
+  </table>
+<br>
+
+  <div class="actions">
+    <%= f.submit "新規登録", class:"btn btn-success" %>
+  </div>
+
+<% end %>
+<br>
+<h5><span class="bg-light">既に登録済みの方</span></h5>
+  <p><%= link_to "こちら", new_customer_session_path %>　からログインしてください。</p>
+<!--<%= render "devise/shared/links" %>-->
+
+</div>

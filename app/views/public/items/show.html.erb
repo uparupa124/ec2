@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="mt-5">
+   <div class="row m-auto">
+    <div class="col-5 text-center">
+     <%= attachment_image_tag @item, :image, size: "300x250", format:"jpeg",fallback:"noimage-1024x898.png", size:"300x250" %>
+    </div>
+      <%= form_with model: @cart_item, local: true do |f| %>
+       <div class="col-7 text-left">
+        <%= @item.name %>
+        <p><%= @item.introduction %></p>
+          ¥<%= (@item.price * 1.1).round %>(税込)
+
+            <% if customer_signed_in? %>
+             <%= f.hidden_field :customer_id, :value => current_customer.id %>
+             <%= f.hidden_field :item_id, :value => @item.id %>
+            <% end %>
+  
+
+           <%= f.select :amount,@numbers, { prompt: "個数選択" } %><br></br>
+           <%= f.submit "カートに入れる", class:"btn btn-success" %>
+       </div>
+     <% end %>
+  </div>
+ </div>
+</div>

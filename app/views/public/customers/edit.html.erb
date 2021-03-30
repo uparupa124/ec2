@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="d-flex align-items-center" style="width:100%; height:100px;">
+    <h3><span class="bg-light">会員情報編集</span></h3>
+  </div>
+   <!--エラーメッセージ-->
+    <% if @customer.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger">
+    <ul>
+      <% @customer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+    <% end %>
+  　　　<!--エラーメッセージ-->
+　  <%= form_with model: @customer, url: "/customers", local: true, method: :PATCH do |f| %>
+　  <table>
+　   <tbody>
+　      <tr>
+　       <td>氏名</td>
+　       <td><%= f.text_field :first_name %></td>
+　       <td><%= f.text_field :last_name %></td>
+　      </tr>
+　       <tr>
+　         <td>フリガナ</td>
+　         <td><%= f.text_field :first_name_kana %></td>
+　         <td><%= f.text_field :last_name_kana %></td>
+　       </tr>
+　         <tr>
+　           <td>郵便番号</td>
+　           <td><%= f.text_field :postal_code %></td>
+　         </tr>
+　           <tr>
+　             <td>住所</td>
+　             <td><%= f.text_field :address %></td>
+　           </tr>
+　             <tr>
+　               <td>電話番号</td>
+　               <td><%= f.text_field :telephone_number %></td>
+　             </tr>
+　               <tr>
+　                 <td>メールアドレス</td>
+　                 <td><%= f.text_field :email %></td>
+　               </tr>
+　   </tbody>
+　  </table>
+　  <div class="mx-auto text-center">
+　   <input type="submit" class="btn btn-success" value="編集内容を保存">
+　  <% end %>
+　 <a class="btn btn-danger" href="/customers/unsubscribe" role="button">退会する</a>
+　  </div>
+</div>

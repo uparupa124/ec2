@@ -1,0 +1,56 @@
+<div class="container px-5 px-sm-0">
+
+ <div class="row">
+   <div class="d-flex align-items-center" style="width:100%; height:100px;">
+    <h3 class="text-left"><span class="bg-light">ショッピングカート</span></h3>
+     <!--<%= link_to "カートを空にする", cart_items_path(@cart_item), method: :delete, "data-confirm" => "本当に空にしますか？" %>-->
+         <div class="text-right" style="width:70%;">
+          <a class="btn btn-danger" href="/cart_items" role="button" data-method="DELETE" data-confirm="本当にカートを空にしますか？">カートを空にする</a>
+         </div>
+   </div>
+    　<table class="table table-bordered">
+　      <thead>
+　        <tr class="bg-light">
+　          <th>商品名</th>
+　          <th>単価(税込)</th>
+　          <th>数量</th>
+　          <th>小計</th>
+　          <th ></th>
+　       </tr>
+　     </thead>
+　       <tbody>
+　        <% sum = 0 %>
+　          <% @cart_items.each do |cart_item| %>
+　            <tr>
+　              <td class="align-middle"><%= attachment_image_tag cart_item.item, :image, size: "100x60", format:"jpeg", fallback:"noimage-1024x898.png", size:"100x60" %><%= cart_item.item.name %></td>
+　              <td class="align-middle"><%= (cart_item.item.price * 1.1).round %></td>
+　                    <%= form_with model: cart_item, url: cart_item_path(cart_item), local: true, method: :PATCH do |f| %>
+　              <td class="align-middle"><%= f.select :amount, options_for_select(@numbers ,{selected: cart_item.amount.to_i}) %>　<input type="submit" class="btn btn-success" value="変更"></td>
+　                    <% end %>
+　              <td class="align-middle"><%= (cart_item.item.price * 1.1 * cart_item.amount).round %><% sum += (cart_item.item.price * 1.1 * cart_item.amount).round %></td>
+　              <td class="align-middle"><a class="btn btn-danger" href="/cart_items/<%= cart_item.id %>" role="button" data-method="delete" data-confirm="本当に削除しますか？">削除する</a></td>
+　            </tr>
+　         <% end %>
+　      </tbody>
+　   </table>
+　
+　 <div class="d-flex align-items-center" style="width:100%;">
+　   <div class="d-inline-block" style="width:80%; height:100px;">
+　<!--<%= link_to "買い物を続ける", "/" %>-->
+　    <a class="btn btn-primary" href="/" role="button">買い物を続ける</a>
+　   </div>
+　    <div class="d-inline-block" style="width:20%;">
+　       <table class="table table-bordered">
+　         <tr>
+　           <td class="bg-light text-align-30">合計金額</td>
+　           <td><%= sum %></td>
+　         </tr>
+　        </table>
+　    </div>
+　 </div>
+     <div class="text-center" style="width:100%;">
+        <!--<%= link_to "情報入力に進む", "/orders/new" %>-->
+        <a class="btn btn-success" href="/orders/new" role="button">情報入力に進む</a>
+     </div>
+  </div>
+ </div>

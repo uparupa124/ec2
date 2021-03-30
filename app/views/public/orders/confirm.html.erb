@@ -1,0 +1,81 @@
+<div class="container">
+ <div class="d-flex align-items-center" style="width:100%; height:100px;">
+  <h3><span class="bg-light">注文情報確認</span></h3>
+ </div>
+    <div class="d-inline-block">
+      <div class="d-inline-block">
+　      <table class="table table-bordered">
+　        <thead>
+　          <tr class="bg-light">
+　            <th>商品名</th>
+　            <th>単価(税込)</th>
+　            <th>数量</th>
+　            <th>小計</th>
+　          </tr>
+　        </thead>
+　          <% @sum = 0 %>
+　          <% @cart_items.each do |cart_item| %>
+　           <tbody>
+　             <tr>
+　               <td><%= attachment_image_tag cart_item.item, :image, size: "60x40", format:"jpeg",fallback:"noimage-1024x898.png", size:"60x40" %><%= cart_item.item.name %></td>
+　               <td><%= (cart_item.item.price * 1.1).round %></td>
+　               <td><%= cart_item.amount %></td>
+　               <td><%= (cart_item.item.price * 1.1 * cart_item.amount).round %><% @sum += (cart_item.item.price * 1.1 * cart_item.amount).round %></td>
+　             </tr>
+　          </tbody>
+　         <% end %>
+　      </table>
+　  </div>
+　    <div class="d-inline-block">
+　      <table class="table table-bordered">
+　        <tbody>
+　         <tr>
+　             <td class="bg-light">送料</td>
+　             <td>800</td>
+　         </tr>
+　           <tr>
+　               <td class="bg-light">商品合計</td>
+　               <td><%= @sum %></td>
+　           </tr>
+　             <tr>
+　                 <td class="bg-light">請求金額</td>
+　                 <td><%= @sum + 800 %></td>
+　             </tr>
+　        </tbody>
+　     </table>
+　   </div>
+　 </div>
+　 
+　 
+　   <div class="list-unstyled">
+　    <li><strong>支払方法</strong>
+        <%= @payment %>
+      </li>
+        <br></br>
+       <li><strong>配送先</strong>
+  　      〒<%= @order_postal_code %>
+  　        <%= @order_address %>
+  　        <%= @order_name %>
+       </li>
+     </div>
+  　
+  　   <%= form_with model: @order, local: true do |f| %>
+  　     <%= f.hidden_field :customer_id, :value => current_customer.id %>
+        <%= f.hidden_field :order_postal_code, :value => @order_postal_code %>
+        <%= f.hidden_field :order_address, :value => @order_address %>
+        <%= f.hidden_field :order_telephone_number, :value => current_customer.telephone_number %>
+        <%= f.hidden_field :order_name, :value => @order_name %>
+        <%= f.hidden_field :shipping, :value => 800 %>
+       <% if @payment == "クレジットカード" %>
+         <% @payment = 1 %>
+       <% elsif @payment == "銀行振込" %>
+         <% @payment = 2 %>
+       <% end %>
+        <%= f.hidden_field :payment, :value => @payment %>
+        <%= f.hidden_field :total_amount, :value => @sum %>
+       
+        <div class="text-center">
+          <input type="submit" class="btn btn-success" value="注文を確定する">
+        </div>
+      <% end %>
+</div>

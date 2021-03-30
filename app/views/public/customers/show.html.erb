@@ -1,0 +1,52 @@
+<div class="container">
+ <div class="d-flex align-items-center" style="width:100%; height:100px;">
+   <h3><span class="bg-light">マイページ</span></h3>
+ </div>
+  <div class="d-inline-block mb-3">
+   <div class="d-inline-block mr-3">
+     <strong>登録情報</strong>
+   </div>
+    <div class="d-inline-block">
+      <a class="btn btn-success" href="/customers/edit" role="button">編集する</a>
+      <!--<%= link_to "編集する", edit_customer_path %>-->
+    </div>
+  </div>
+ <table class="table table-bordered">
+   <tbody>
+     <tr>
+       <td class="bg-light">氏名</td>
+       <td><%= @customer.first_name %>&nbsp;<%= @customer.last_name %></td>
+     </tr>
+      <tr>
+       <td class="bg-light">カナ</td>
+       <td><%= @customer.first_name_kana %>&nbsp;<%= @customer.last_name_kana %></td>
+      </tr>
+       <tr>
+        <td class="bg-light">郵便番号</td>
+        <td><%= @customer.postal_code %></td>
+       </tr>
+        <tr>
+         <td class="bg-light">住所</td>
+         <td><%= @customer.address %></td>
+        </tr>
+         <tr>
+          <td class="bg-light">電話番号</td>
+          <td><%= @customer.telephone_number %></td>
+         </tr>
+          <tr>
+           <td class="bg-light">メールアドレス</td>
+           <td><%= @customer.email %></td>
+          </tr>
+   </tbody>
+ </table>
+  <table>
+   <tr>
+    <td><strong>配送先</strong></td>
+    <td><a class="btn btn-primary" href="/addresses" role="button">一覧を見る</a></td>
+   </tr>
+     <tr>
+       <td><strong>注文履歴</strong></td>
+       <td><a class="btn btn-primary" href="/orders" role="button">一覧を見る</a></td>
+     </tr>
+  </table>
+</div>
